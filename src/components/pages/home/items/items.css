@@ -1,0 +1,25 @@
+table{
+  border : 3px solid black;
+  margin: auto;
+}
+
+td, th {
+  padding : 15px 15px 15px 15px;
+}
+
+td{
+  border : 2px solid red;
+}
+
+th{
+  border : 2px solid blue;
+  
+}
+
+td.count {
+  text-align: right;
+}
+
+td.name {
+  text-align: center;
+}
