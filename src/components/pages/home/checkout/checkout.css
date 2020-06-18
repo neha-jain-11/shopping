@@ -9,3 +9,11 @@
 #checkout-container {
   text-align: center; 
 }
+
+.checkout-a{
+  width: 100px;
+  height: 20px;
+  background-color: orange;
+  text-align: center;
+  margin: auto;
+}

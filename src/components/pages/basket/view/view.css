@@ -1,0 +1,13 @@
+#drop-actions{
+  margin: auto;
+}
+
+
+#view-total {
+  margin-left: auto;
+  margin-right: auto;
+  margin: 2%;
+  font-size: 30px;
+  text-align: center;
+  color: green;
+}

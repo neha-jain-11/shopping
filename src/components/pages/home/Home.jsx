@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import Filters from './filters/Filters.jsx';
 import Items from './items/Items.jsx';
 import Checkout from './checkout/Checkout.jsx';
+import { getTotalPrice } from '../../../utils/util';
 import './home.css';
 
 export const data = [
@@ -36,7 +38,6 @@ export const data = [
 ];
 
 class Home extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -46,11 +47,10 @@ class Home extends Component {
     }
     this.updateCheck = this.updateCheck.bind(this);
     this.updateOptionHandler = this.updateOptionHandler.bind(this);
+    this.checkout = this.checkout.bind(this);
   }
 
-  getTotalPrice(data) {
-    return data.reduce((price, o) => (price + (o.price * o.quantity)), 0);
-  }
+
 
   updateCheck(event) {
     const checked = event.target.checked;
@@ -69,7 +69,7 @@ class Home extends Component {
     this.setState({
       dataItems: itemData,
       checkIdList: checkList,
-      totalPrice: this.getTotalPrice(itemData)
+      totalPrice: getTotalPrice(itemData)
     });
   }
 
@@ -96,6 +96,7 @@ class Home extends Component {
 
   checkout() {
     console.log('check me out !!!!');
+    this.props.history.push('/checkout');
 
   }
 
@@ -103,7 +104,7 @@ class Home extends Component {
     return (
       <div>
         <div className='home'>Welcome Home</div>
-        <Filters />
+        {/* <Filters /> */}
         <Items totalPrice={this.state.totalPrice} list={this.state.dataItems} checkIdList={this.state.checkIdList} updateOptionHandler={this.updateOptionHandler} updateCheck={this.updateCheck} />
         <Checkout checkout={this.checkout} />
       </div>
@@ -112,4 +113,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default withRouter(Home);
