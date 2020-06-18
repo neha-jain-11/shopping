@@ -23,3 +23,10 @@ td.count {
 td.name {
   text-align: center;
 }
+
+#total {
+  margin: 2%;
+  font-size: 30px;
+  text-align: center;
+  color: green;
+}

@@ -1,0 +1,11 @@
+#checkout {
+  padding: 2%;
+  color: green;
+  font-size: 30px;
+  text-align: center; 
+  background-color: rgb(208, 228, 196);
+}
+
+#checkout-container {
+  text-align: center; 
+}

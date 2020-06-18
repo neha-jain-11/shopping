@@ -28,7 +28,8 @@ const Items = (props) => {
 
         </tbody>
       </table>
-      {props.items ? props.items.map((iem, index) => (<li key={index}>{item}</li>)) : <span>There are no items</span>}
+
+      <div id='total'> Total price for your items: <span><b>Rs {props.totalPrice}</b></span> </div>
       <hr />
     </div>
   )
