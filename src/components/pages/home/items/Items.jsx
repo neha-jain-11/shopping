@@ -4,7 +4,6 @@ import MyDropdown from '../../../atoms/Dropdown.jsx';
 import './items.css';
 
 const Items = (props) => {
-  console.log('props', props)
   return (
     <div>
       <h4>Item Lists</h4>
@@ -20,14 +19,10 @@ const Items = (props) => {
         <tbody>
           {props.list ? props.list.map((item, index) => (
             <tr key={index}>
-              <td><MyCheckbox id={`check-${item.name.toLowerCase()}`} /></td>
-              {
-                Object.keys(item).map((data, index) => (
-                  <td key={index} className={data === 'price' ? 'count' : 'name'}>{
-                    data === 'price' ? <span className='count'>Rs {item[data]}</span> : <span>{item[data]}</span>} </td>
-                ))
-              }
-              <td><MyDropdown id={`drop-${item.name.toLowerCase()}`} /></td>
+              <td><MyCheckbox id={`check-${item.itemId}`} check={props.checkIdList.includes(item.itemId)} onChangeHandler={props.updateCheck} /></td>
+              <td><span>{item.name}</span></td>
+              <td><span className='count'>Rs {item.price}</span></td>
+              <td><MyDropdown id={`drop-${item.itemId}`} value={item.quantity} onChangeHandler={props.updateOptionHandler} /></td>
             </tr>
           )) : <span>There are no items</span>}
 
