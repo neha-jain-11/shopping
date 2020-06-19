@@ -21,7 +21,6 @@ const App = () => (
         <Route path='/home'><Home /></Route>
         <Route path='/checkout'><Basket /></Route>
         <Route path='/end'><End /></Route>
-        <Route path='/'><Basket /></Route>
       </Switch>
 
     </Router>

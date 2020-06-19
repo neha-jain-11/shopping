@@ -45,16 +45,19 @@ class Basket extends Component {
   constructor() {
     super();
     this.state = {
-      dataItems: checkoutData,
+      dataItems: [...checkoutData],
       totalPrice: getTotalPrice(checkoutData),
       status: {
         delete: false,
         edit: false
       }
-    }
+    };
+    console.log('hehehhehe checkoutData', checkoutData, this.state.dataItems);
     this.save = this.save.bind(this);
+    this.saveEdit = this.saveEdit.bind(this);
     this.getAction = this.getAction.bind(this);
     this.updateCheck = this.updateCheck.bind(this);
+    this.updateOptionHandler = this.updateOptionHandler.bind(this);
   }
 
   getAction(event) {
@@ -76,17 +79,46 @@ class Basket extends Component {
     this.setState({ dataItems, totalPrice: getTotalPrice(dataItems) });
   }
 
+  updateOptionHandler(event) {
+    let quantity = Number(event.target.value);
+    const selectedItemId = event.target.id.split('-')[1];
+    let itemData = this.state.dataItems;
+    const itemIndex = itemData.findIndex((i) => i.itemId === selectedItemId);
+
+
+
+    if (quantity === 0) {
+      itemData.splice(itemIndex, 1);
+    } else {
+      itemData[itemIndex] = { ...itemData[itemIndex], ...{ quantity } };
+    }
+    this.setState({
+      dataItems: itemData,
+      totalPrice: getTotalPrice(itemData)
+    });
+  }
+
   save() {
     //ajax call to save data
     this.props.history.push('/end');
+  }
+
+  saveEdit() {
+    this.setState({
+      status: { delete: false, edit: false }
+    });
   }
 
   render() {
     return (
       <div>
         <div className='basket'>Your BASKET</div>
-        <View totalPrice={this.state.totalPrice} list={this.state.dataItems} getAction={this.getAction} status={this.state.status} updateCheck={this.updateCheck} />
+        <View totalPrice={this.state.totalPrice} list={this.state.dataItems}
+          getAction={this.getAction} status={this.state.status} updateCheck={this.updateCheck} updateOptionHandler={this.updateOptionHandler}
+        />
         <div className='checkout-a'><a onClick={this.save}>SAVE</a></div>
+        <br /><br />
+        <div className='checkout-a'><a onClick={this.saveEdit}>SAVE EDIT</a></div>
       </div>
     );
   }
