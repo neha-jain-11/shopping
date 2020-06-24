@@ -106,6 +106,10 @@ app.get('/api/test2', (req, res) => {
   res.json({ test: "yes" });
 });
 
+app.get('/api/test-tt', (req, res) => {
+  res.json({ name: 'hehe' });
+});
+
 app.post('/api/test1', (req, res) => {
 
   console.log('headers', req.headers['custom-header']);

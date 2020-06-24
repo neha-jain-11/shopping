@@ -90,7 +90,7 @@ class Home extends Component {
     this.setState({
       dataItems: itemData,
       checkIdList: checkList,
-      totalPrice: this.getTotalPrice(itemData)
+      totalPrice: getTotalPrice(itemData)
     });
   }
 

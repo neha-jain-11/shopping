@@ -8,6 +8,7 @@ import {
 import Home from './pages/home/Home.jsx';
 import Basket from './pages/basket/Basket.jsx';
 import End from './pages/end/End.jsx';
+import Test from './pages/test/Test.jsx';
 import './app.css';
 
 const App = () => (
@@ -17,9 +18,13 @@ const App = () => (
       <Link to="/home">Home</Link>
       <br />
       <Link to="/checkout">Checkout</Link>
+      <br />
+      <br />
+      <Link to="/test">Test</Link>
       <Switch>
         <Route path='/home'><Home /></Route>
         <Route path='/checkout'><Basket /></Route>
+        <Route path='/test'><Test /></Route>
         <Route path='/end'><End /></Route>
       </Switch>
 

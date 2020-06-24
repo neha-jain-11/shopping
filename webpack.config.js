@@ -2,6 +2,14 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
+  devServer: {
+    proxy: {
+      'http://localhost:8080': {
+        target: 'http://localhost:3001',
+        secure: false
+      }
+    }
+  },
   module: {
     rules: [
       {
