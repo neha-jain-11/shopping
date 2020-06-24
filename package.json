@@ -6,7 +6,10 @@
   "scripts": {
     "test": "jest --config ./jest.config.json --watch",
     "start": "webpack-dev-server --mode development",
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "e2e:generate:report": "mochawesome-merge cypress/results/*.json > cypress/results/output.json",
+    "e2e:coverage:report": "marge cypress/results/output.json --reportDir ./cypress/results --inline"
   },
   "author": "",
   "license": "ISC",
