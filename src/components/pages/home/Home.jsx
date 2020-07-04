@@ -1,40 +1,45 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import Filters from './filters/Filters.jsx';
-import Items from './items/Items.jsx';
-import Checkout from './checkout/Checkout.jsx';
-import { getTotalPrice } from '../../../utils/util';
-import './home.css';
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import Filters from "./filters/Filters.jsx";
+import Items from "./items/Items.jsx";
+import Checkout from "./checkout/Checkout.jsx";
+import { getTotalPrice } from "../../../utils/util";
+import "./home.css";
 
 export const data = [
   {
-    "itemId": "001",
-    "name": "Apple",
-    "price": "120"
+    itemId: "001",
+    name: "Apple",
+    price: "120",
+  },
+
+  {
+    itemId: "002",
+    name: "Orange",
+    price: "100",
   },
   {
-    "itemId": "002",
-    "name": "Orange",
-    "price": "100"
+    itemId: "003",
+    name: "Paneer",
+    price: "150",
+  },
+
+  {
+    itemId: "004",
+    name: "Curd",
+    price: "20",
   },
   {
-    "itemId": "003",
-    "name": "Paneer",
-    "price": "150"
+    itemId: "005",
+    name: "Toor Dal",
+    price: "60",
   },
+
   {
-    "itemId": "004",
-    "name": "Curd",
-    "price": "20"
-  }, {
-    "itemId": "005",
-    "name": "Toor Dal",
-    "price": "60"
-  }, {
-    "itemId": "006",
-    "name": "Masoor Dal",
-    "price": "90"
-  }
+    itemId: "006",
+    name: "Masoor Dal",
+    price: "90",
+  },
 ];
 
 class Home extends Component {
@@ -43,18 +48,16 @@ class Home extends Component {
     this.state = {
       dataItems: data.map((item) => ({ ...item, ...{ quantity: 0 } })),
       checkIdList: [],
-      totalPrice: 0
-    }
+      totalPrice: 0,
+    };
     this.updateCheck = this.updateCheck.bind(this);
     this.updateOptionHandler = this.updateOptionHandler.bind(this);
     this.checkout = this.checkout.bind(this);
   }
 
-
-
   updateCheck(event) {
     const checked = event.target.checked;
-    const selectedItemId = event.target.id.split('-')[1];
+    const selectedItemId = event.target.id.split("-")[1];
     let itemData = this.state.dataItems;
     let checkList = this.state.checkIdList;
     const itemIndex = itemData.findIndex((i) => i.itemId === selectedItemId);
@@ -69,13 +72,13 @@ class Home extends Component {
     this.setState({
       dataItems: itemData,
       checkIdList: checkList,
-      totalPrice: getTotalPrice(itemData)
+      totalPrice: getTotalPrice(itemData),
     });
   }
 
   updateOptionHandler(event) {
     let quantity = Number(event.target.value);
-    const selectedItemId = event.target.id.split('-')[1];
+    const selectedItemId = event.target.id.split("-")[1];
     let itemData = this.state.dataItems;
     let checkList = this.state.checkIdList;
     const itemIndex = itemData.findIndex((i) => i.itemId === selectedItemId);
@@ -85,30 +88,34 @@ class Home extends Component {
     if (quantity === 0) {
       checkList.splice(itemIndex, 1);
     } else {
-      (checkList).push(selectedItemId);
+      checkList.push(selectedItemId);
     }
     this.setState({
       dataItems: itemData,
       checkIdList: checkList,
-      totalPrice: getTotalPrice(itemData)
+      totalPrice: getTotalPrice(itemData),
     });
   }
 
   checkout() {
-    console.log('check me out !!!!');
-    this.props.history.push('/checkout');
-
+    console.log("check me out !!!!");
+    this.props.history.push("/checkout");
   }
 
   render() {
     return (
       <div>
-        <div className='home'>Welcome Home</div>
+        <div className="home">Welcome Home</div>
         {/* <Filters /> */}
-        <Items totalPrice={this.state.totalPrice} list={this.state.dataItems} checkIdList={this.state.checkIdList} updateOptionHandler={this.updateOptionHandler} updateCheck={this.updateCheck} />
+        <Items
+          totalPrice={this.state.totalPrice}
+          list={this.state.dataItems}
+          checkIdList={this.state.checkIdList}
+          updateOptionHandler={this.updateOptionHandler}
+          updateCheck={this.updateCheck}
+        />
         <Checkout checkout={this.checkout} />
       </div>
-
     );
   }
 }
